@@ -46,14 +46,34 @@ class Item(BaseModel):
     dead: Optional[bool] = Field(alias="dead", examples=[True, False], default=False)
     parent: Optional[int] = Field(alias="parent", examples=[1, 2, 3], default=None)
     poll: Optional[int] = Field(alias="poll", examples=[1, 2, 3], default=None)
-    kids: List[int] = Field(alias="kids", examples=[[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-    url: str = Field(alias="url", examples=["url1", "url2", "url3"])
-    score: int = Field(alias="score", examples=[1, 2, 3])
-    title: str = Field(alias="title", examples=["title1", "title2", "title3"])
+    kids: Optional[List[int]] = Field(
+        alias="kids", examples=[[1, 2, 3], [4, 5, 6], [7, 8, 9]], default=None
+    )
+    url: Optional[str] = Field(
+        alias="url", examples=["url1", "url2", "url3"], default=None
+    )
+    score: Optional[int] = Field(alias="score", examples=[1, 2, 3], default=None)
+    title: Optional[str] = Field(
+        alias="title", examples=["title1", "title2", "title3"], default=None
+    )
     parts: Optional[List[int]] = Field(
         alias="parts", examples=[[1, 2, 3], [4, 5, 6], [7, 8, 9]], default=None
     )
-    descendants: int = Field(alias="descendants", examples=[1, 2, 3])
+    descendants: Optional[int] = Field(
+        alias="descendants",
+        examples=[1, 2, 3],
+        default=None,
+        description="Number of comments",
+    )
+
+    def __post_init__(self):
+        if self.type == ItemType.JOB:
+            assert self.url, "URL is required for a job"
+        if self.type == ItemType.STORY:
+            assert self.title, "Title is required for a story"
+            assert self.url, "URL is required for a story"
+        if self.type == ItemType.COMMENT:
+            assert self.text, "Text is required for a comment"
 
     def __str__(self):
         return f"{self.title} by {self.by} ({self.url})"
@@ -63,6 +83,30 @@ class Item(BaseModel):
         Check if the item is a story
         """
         return self.type == ItemType.STORY
+
+    def does_have_comments(self) -> bool:
+        """
+        Check if the item has comments
+        """
+        if self.type == ItemType.STORY:
+            return self.descendants > 0
+        return False
+
+
+class User(BaseModel):
+    """
+    User class to represent a user from Hacker News
+    """
+
+    id: str = Field(alias="id", examples=["user1", "user2", "user3"])
+    created: int = Field(alias="created", examples=[1615767531, 1615767532, 1615767533])
+    karma: int = Field(alias="karma", examples=[1, 2, 3])
+    about: Optional[str] = Field(
+        alias="about", examples=["about1", "about2", "about3"], default=None
+    )
+    submitted: Optional[List[int]] = Field(
+        alias="submitted", examples=[[1, 2, 3], [4, 5, 6], [7, 8, 9]], default=None
+    )
 
 
 class HackerNews:
