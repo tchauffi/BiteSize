@@ -1,0 +1,11 @@
+name: bitesize_env
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.10
+  - langchain==0.3.0
+  - gradio==4.44.0
+  - ipykernel
+  - pre-commit
+prefix: /Users/thibautchauffier/miniconda3/envs/bitesize_env
