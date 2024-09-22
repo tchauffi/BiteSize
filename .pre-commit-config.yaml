@@ -1,0 +1,11 @@
+repos:
+- repo: https://github.com/psf/black
+  rev: stable
+  hooks:
+  - id: black
+    files: ^python/
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.26.3
+  hooks:
+  - id: yamllint
+    files: \.yml$
