@@ -1,6 +1,6 @@
 {
-  "image": "ghcr.io/rocker-org/devcontainer-features/miniforge",
   "features": {
+  "ghcr.io/rocker-org/devcontainer-features/miniforge:2.0.0": {}
   },
   "customizations": {
     "vscode": {
