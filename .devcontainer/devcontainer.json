@@ -1,5 +1,16 @@
 {
   "image": "ghcr.io/rocker-org/devcontainer-features/miniforge:2",
   "features": {
-  }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "DavidAnson.vscode-markdownlint",
+        "GitHub.copilot"
+      ]
+    }
+  }, 
+  "runArgs": [
+    "--env", "REGION=eu"
+  ]
 }
