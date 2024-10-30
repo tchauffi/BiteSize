@@ -9,8 +9,5 @@
         "GitHub.copilot"
       ]
     }
-  }, 
-  "runArgs": [
-    "--env", "REGION=eu"
-  ]
+  }
 }
