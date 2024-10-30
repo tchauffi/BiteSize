@@ -1,6 +1,6 @@
 {
   "features": {
-  "ghcr.io/rocker-org/devcontainer-features/miniforge:2.0.0": {}
+    "ghcr.io/rocker-org/devcontainer-features/miniforge:2.0.0": {}
   },
   "customizations": {
     "vscode": {
@@ -9,7 +9,11 @@
         "GitHub.copilot",
         "ms-python.python",
         "ms-toolsai.jupyter"
-      ]
+      ],
+      "settings": {
+        "python.pythonPath": "/opt/conda/envs/bitesize_env/bin/python"
+      }
     }
-  }
+  },
+  "postCreateCommand": "conda env create -f environment.yml"
 }
