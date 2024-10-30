@@ -1,12 +1,14 @@
 {
-  "image": "ghcr.io/rocker-org/devcontainer-features/miniforge:2",
+  "image": "ghcr.io/rocker-org/devcontainer-features/miniforge",
   "features": {
   },
   "customizations": {
     "vscode": {
       "extensions": [
         "DavidAnson.vscode-markdownlint",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "ms-python.python",
+        "ms-toolsai.jupyter"
       ]
     }
   }
